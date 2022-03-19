@@ -1,8 +1,8 @@
-From nvcr.io/nvidia/pytorch:19.04-py3
+From nvcr.io/nvidia/pytorch:22.02-py3
 
 RUN apt-get -y update
 
-RUN apt-get install -y python3-pip software-properties-common wget ffmpeg
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y python3-pip software-properties-common wget ffmpeg
 
 RUN apt-get -y update
 
@@ -28,5 +28,5 @@ EXPOSE 5000
 
 ENTRYPOINT ["python3"]
 
-CMD ["app.py"]
+CMD ["app-video.py"]
 

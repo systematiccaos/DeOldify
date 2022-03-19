@@ -52,7 +52,7 @@ class ModelImageVisualizer:
 
     def _clean_mem(self):
         torch.cuda.empty_cache()
-        # gc.collect()
+        gc.collect()
 
     def _open_pil_image(self, path: Path) -> Image:
         return PIL.Image.open(path).convert('RGB')

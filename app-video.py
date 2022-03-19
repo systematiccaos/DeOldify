@@ -1,5 +1,6 @@
-# import the necessary packages
 import os
+import torch
+# import the necessary packages
 import sys
 import requests
 import ssl
@@ -18,20 +19,22 @@ from app_utils import get_model_bin
 from app_utils import convertToJPG
 
 from os import path
-import torch
 
 import fastai
 from deoldify.visualize import *
+# Handle switch between GPU and CPU
+if torch.cuda.is_available():
+    torch.backends.cudnn.benchmark = True
+    torch.backends.cudnn.enabled = True
+    os.environ["CUDA_VISIBLE_DEVICES"] = "all"
+    print("using cuda")
+else:
+    del os.environ["CUDA_VISIBLE_DEVICES"]
+    print("using cpu")
 from pathlib import Path
 import traceback
 
 
-# Handle switch between GPU and CPU
-if torch.cuda.is_available():
-    torch.backends.cudnn.benchmark = True
-    os.environ["CUDA_VISIBLE_DEVICES"] = "0"
-else:
-    del os.environ["CUDA_VISIBLE_DEVICES"]
 
 app = Flask(__name__)
 
